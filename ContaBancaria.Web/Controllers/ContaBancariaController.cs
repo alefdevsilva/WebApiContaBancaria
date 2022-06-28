@@ -8,7 +8,6 @@ namespace ContaBancaria.Web.Controllers
     [Route("[controller]")]
     public class ContaBancariaController
     {
-        string nome = "Alef";
         List<Pessoa> pessoas = new List<Pessoa>();
 
         //Buscar Todos

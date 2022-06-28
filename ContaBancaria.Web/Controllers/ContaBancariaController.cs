@@ -1,4 +1,5 @@
-﻿using ContaBancaria.Web.Models;
+﻿using System.Collections.Generic;
+using ContaBancaria.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContaBancaria.Web.Controllers
@@ -7,18 +8,33 @@ namespace ContaBancaria.Web.Controllers
     [Route("[controller]")]
     public class ContaBancariaController
     {
-        
-        Pessoa pessoa = new Pessoa(1, "Alef Silva");
-        [HttpGet("{pessoas}")]
-        public Pessoa RetornaNome()
+        string nome = "Alef";
+        List<Pessoa> pessoas = new List<Pessoa>();
+
+        [HttpGet("api/pessoas")]
+        public IEnumerable<Pessoa> RetornaNomes()
         {
-            return pessoa;
+            Pessoa pessoa1 = new Pessoa();
+            pessoa1.NomeCompleto = "Alef Silva";
+            Pessoa pessoa2 = new Pessoa();
+            pessoa2.NomeCompleto = "Will";
+            pessoas.Add(pessoa1);
+            pessoas.Add(pessoa2);
+          
+
+            return pessoas;
         }
 
-        [HttpPost]
-        public string Post()
+        [HttpPost("api/AdicionarPessoas")]
+        public List<Pessoa> AdicionarPessoas(List<Pessoa> pessoas)
         {
-            return "Exemplo de Post";
+            return pessoas;
+        }
+
+        [HttpPost("api/AdicionarPessoa")]
+        public Pessoa AdicionarPessoas(Pessoa pessoa)
+        {
+            return pessoa;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ContaBancaria.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ContaBancaria.Web.Models
 {
     public class Pessoa
     {

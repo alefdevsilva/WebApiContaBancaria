@@ -1,5 +1,5 @@
 {
     "ConnectionStrings": {
-        "ContaBancariaDB": "Server=localhost\\SQLEXPRESS01;Database=ContaBancariaDB;Trusted_Connection=True;"
+        "ContaBancariaDB": "Server=localhost\\SQLEXPRESS;Database=ContaBancariaDB;Trusted_Connection=True;"
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ContaBancaria.Domain.Models
+﻿namespace ContaBancaria.Domain.Models
 {
     public class Usuario
     {

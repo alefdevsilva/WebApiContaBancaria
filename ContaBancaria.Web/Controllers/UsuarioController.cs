@@ -15,7 +15,7 @@ namespace ContaBancaria.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             try
             {
@@ -26,6 +26,7 @@ namespace ContaBancaria.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpPost]
         public IActionResult Post([FromBody] Usuario usuario)
         {

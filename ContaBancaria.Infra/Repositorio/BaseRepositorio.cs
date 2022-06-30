@@ -27,6 +27,7 @@ namespace QuickBuy.Repositorio.Repositorios
         public TEntity ObterPorId(int id)
         {
             return ContaBancariaContexto.Set<TEntity>().Find(id);
+       
         }
 
         public IEnumerable<TEntity> ObterTodos()

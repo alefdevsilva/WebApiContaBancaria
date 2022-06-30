@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ContaBancaria.Infra.Contexto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using QuickBuy.Dominio.Contratos;
+using QuickBuy.Repositorio.Repositorios;
 
 namespace ContaBancaria.Web
 {
@@ -17,7 +14,9 @@ namespace ContaBancaria.Web
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -26,6 +25,12 @@ namespace ContaBancaria.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            var connectionStrings = Configuration.GetConnectionString("ContaBancariaDB");
+            services.AddDbContext<ContaBancariaContexto>(options =>
+                                                    options
+                                                    .UseLazyLoadingProxies()
+                                                    .UseSqlServer(connectionStrings, m => m.MigrationsAssembly("ContaBancaria.Infra")));
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

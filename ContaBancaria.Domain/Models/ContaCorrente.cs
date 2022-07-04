@@ -5,10 +5,13 @@ using System.Text;
 
 namespace ContaBancaria.Domain.Models
 {
-    public class ContaCorrente : ContaAbstrata, IContaCorrente
+    public class ContaCorrente : ContaAbstrata
     {
-        public ContaCorrente(Cliente Titular, int numeroDaconta, double saldo) : base(Titular, numeroDaconta, saldo)
+        public virtual Cliente Cliente { get; set; }
+        public int ClienteId { get; set; }
+        public ContaCorrente(int id, int ClienteId, int numeroDaconta, double saldo) : base(id, numeroDaconta, saldo)
         {
+            this.ClienteId = ClienteId;
         }
 
         public double consultaSaldo()

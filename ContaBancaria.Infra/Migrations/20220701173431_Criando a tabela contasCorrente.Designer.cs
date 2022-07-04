@@ -3,14 +3,16 @@ using ContaBancaria.Infra.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContaBancaria.Infra.Migrations
 {
     [DbContext(typeof(ContaBancariaContexto))]
-    partial class ContaBancariaContextoModelSnapshot : ModelSnapshot
+    [Migration("20220701173431_Criando a tabela contasCorrente")]
+    partial class CriandoatabelacontasCorrente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,23 +28,17 @@ namespace ContaBancaria.Infra.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(11)")
-                        .HasMaxLength(11);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rg")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("ContaBancaria.Domain.Models.ContaCorrente", b =>
@@ -66,29 +62,6 @@ namespace ContaBancaria.Infra.Migrations
                     b.HasIndex("ClienteId");
 
                     b.ToTable("ContasCorrente");
-                });
-
-            modelBuilder.Entity("ContaBancaria.Domain.Models.ContaPoupanca", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumeroDaconta")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Saldo")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.ToTable("ConstasPoupanca");
                 });
 
             modelBuilder.Entity("ContaBancaria.Domain.Models.Usuario", b =>
@@ -124,15 +97,6 @@ namespace ContaBancaria.Infra.Migrations
                 });
 
             modelBuilder.Entity("ContaBancaria.Domain.Models.ContaCorrente", b =>
-                {
-                    b.HasOne("ContaBancaria.Domain.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ContaBancaria.Domain.Models.ContaPoupanca", b =>
                 {
                     b.HasOne("ContaBancaria.Domain.Models.Cliente", "Cliente")
                         .WithMany()

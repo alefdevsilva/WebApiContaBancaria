@@ -1,4 +1,6 @@
+using ContaBancaria.Domain.Interfaces;
 using ContaBancaria.Infra.Contexto;
+using ContaBancaria.Infra.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +33,7 @@ namespace ContaBancaria.Web
                                                     .UseLazyLoadingProxies()
                                                     .UseSqlServer(connectionStrings, m => m.MigrationsAssembly("ContaBancaria.Infra")));
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

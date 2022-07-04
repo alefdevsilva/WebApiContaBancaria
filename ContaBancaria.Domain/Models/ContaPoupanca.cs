@@ -7,8 +7,11 @@ namespace ContaBancaria.Domain.Models
 {
     public class ContaPoupanca : ContaAbstrata, IContaPoupanca
     {
-        public ContaPoupanca(Cliente Titular, int numeroDaconta, double saldo) : base(Titular, numeroDaconta, saldo)
+        public virtual Cliente Cliente { get; set; }
+        public int ClienteId { get; set; }
+        public ContaPoupanca(int id, int ClienteId, int numeroDaconta, double saldo) : base(id, numeroDaconta, saldo)
         {
+            this.ClienteId = ClienteId;
         }
 
         public double consultaSaldo()
@@ -21,7 +24,7 @@ namespace ContaBancaria.Domain.Models
             double valorInvestido = 1000.0;
             for (int i = 1; i <= 12; i++)
             {
-                valorInvestido = valorInvestido + 1; //* 1.01;
+                valorInvestido = valorInvestido * 1.01; 
             }
             return true;
         }

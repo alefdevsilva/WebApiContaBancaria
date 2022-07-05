@@ -69,6 +69,23 @@ namespace ContaBancaria.Web.Controllers
             }
         }
 
+        [HttpPut("Sacar")]
+        public IActionResult Sacar([FromBody] ContaCorrente contaCorrenteDTO)
+        {
+            try
+            {
+                var corrente = _correnteRepositorio.ObterPorId(contaCorrenteDTO.Id);
+
+                corrente.Sacar(contaCorrenteDTO.Saldo);
+                _correnteRepositorio.Atualizar(corrente);
+                return Ok(corrente);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete("remove/{Id}")]
         public IActionResult RemoveById(int id)
         {

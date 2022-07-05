@@ -17,5 +17,9 @@ namespace ContaBancaria.Domain.Interfaces
             this.NumeroDaconta = numeroDaconta;
             this.Saldo = saldo;
         }
+        public ContaAbstrata()
+        {
+
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace ContaBancaria.Domain.Interfaces
         public bool Sacar(double valorDoSaque);
         public bool Depositar(double valorDposito);
         public double consultaSaldo();
+        public IEnumerable<ContaCorrente> BuscarContaCorrenteCliente();
     }
 }

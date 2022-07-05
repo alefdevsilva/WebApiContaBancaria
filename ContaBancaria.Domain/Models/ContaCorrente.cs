@@ -13,7 +13,10 @@ namespace ContaBancaria.Domain.Models
         {
             this.ClienteId = ClienteId;
         }
-
+        public ContaCorrente()
+        {
+                
+        }
         public double consultaSaldo()
         {
             return this.Saldo;

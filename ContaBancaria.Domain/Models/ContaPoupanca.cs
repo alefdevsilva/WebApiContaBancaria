@@ -14,6 +14,10 @@ namespace ContaBancaria.Domain.Models
             this.ClienteId = ClienteId;
         }
 
+        public ContaPoupanca()
+        { 
+        }
+
         public double consultaSaldo()
         {
             return this.Saldo;

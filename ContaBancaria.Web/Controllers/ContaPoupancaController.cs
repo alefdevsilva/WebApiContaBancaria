@@ -14,8 +14,8 @@ namespace ContaBancaria.Web.Controllers
         {
             _contaPoupancaRepositorio = contaPoupancaRepositorio;
         }
-
-         public IActionResult GetById(int id)
+        [HttpGet("GetById/{Id}")]
+        public IActionResult GetById(int id)
         {
             try
             {
@@ -34,6 +34,39 @@ namespace ContaBancaria.Web.Controllers
             try
             {
                 return Ok(_contaPoupancaRepositorio.ObterTodos());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("Sacar")]
+        public IActionResult Sacar([FromBody] ContaPoupanca contaPoupanca)
+        {
+            try
+            {
+                var poupanca = _contaPoupancaRepositorio.ObterPorId(contaPoupanca.Id);
+
+                poupanca.Sacar(contaPoupanca.Saldo);
+                _contaPoupancaRepositorio.Atualizar(poupanca);
+                return Ok(poupanca);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("Depositar")]
+        public IActionResult Depositar([FromBody] ContaPoupanca contaPoupanca)
+        {
+            try
+            {
+                var poupanca = _contaPoupancaRepositorio.ObterPorId(contaPoupanca.Id);
+                poupanca.Depositar(contaPoupanca.Saldo);
+                _contaPoupancaRepositorio.Atualizar(poupanca);
+                return Ok(poupanca);
             }
             catch (Exception ex)
             {
